@@ -24,10 +24,13 @@
     --color-summary: #9B9B9B;
 
     --sidebar-width: 250px;
+    --binding-color: white;
 }
 
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth !important;
+    scroll-margin-top: 1em;
 }
 
 html, body {
@@ -108,6 +111,7 @@ a {
 
 .panel .panel {
     border: 1px solid var(--color-separator);
+    border-left: inherit;;
 }
 
 .section-name {
@@ -130,11 +134,18 @@ a {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+    border-left: 3px solid var(--binding-color);
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 
     & > * {
         margin-top: 0;
         margin-bottom: 0;
     }
+}
+
+.feature + .feature {
+    margin-top: 1em;
 }
 
 .feature-documentation {
@@ -154,8 +165,8 @@ a {
 }
 
 .badge {
-    background-color: var(--color-badge);
-    color: var(--color-text);
+    background-color: #ff00571f;
+    color: #ff76b0;
     padding: 0.25em 0.5em;
     border-radius: 50px;
     font-size: 0.65em;
@@ -182,25 +193,39 @@ code {
 .function-summary {
     display: flex;
     flex-wrap: wrap;
-    gap: 1em;
+    gap: .5em;
     font-family: Uiua386, monospace;
 
     .summary-badge {
-        color: black;
-        padding: 0 0.5em;
-        border-radius: 50px;
+        color: var(--text-color);
+        padding: 0 0.25em;
+        border-radius: 4px;
+        /* border: 1px solid var(--badge-color); */
+        background-color: rgb(from var(--badge-color) r g b / 20%);
     }
 
     .signature {
-        background-color: #cacaca;
+        --badge-color: #cacaca;
+        --text-color: #f1f1f1;
     }
 
     .output {
-        background-color: #569cd6;
+        --badge-color: #569cd6;
+        --text-color: #6fbeff;
     }
 
     .input {
-        background-color: #ce9178;
+        --badge-color: #ce9178;
+        --text-color: #ffb89c;
+    }
+
+    .optional {
+        --badge-color: #95d16a;
+        --text-color: #b8ff97;
+    }
+
+    .inferred {
+        font-style: italic;
     }
 }
 
@@ -217,27 +242,29 @@ code {
     }
 
     .data-badge {
-        color: black;
+        color: var(--color-text);
         padding: 0.25em 0.5em;
         font-weight: bold;
     }
 
     .badge-row > .data-badge:first-child {
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
+        border-top-left-radius: 0.3em;
+        border-bottom-left-radius: 0.3em;
     }
 
     .badge-row > .data-badge:last-child {
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
+        border-top-right-radius: 0.3em;
+        border-bottom-right-radius: 0.3em;
     }
 
     .type {
-        background-color: #cacaca;
+        background-color: #95d16a29;
+        color: #b8ff97;
     }
 
     .input {
-        background-color: #ce9178;
+        background-color: #ce917829;
+        color: #ffb89c;
     }
 }
 
@@ -253,7 +280,7 @@ code {
     .data-badge {
         color: black;
         padding: 0 0.5em;
-        border-radius: 50px;
+        border-radius: 0.3em;
     }
 
     .input {
@@ -360,35 +387,40 @@ table td code {
 
 summary {
     color: var(--color-summary);
+    cursor: pointer;
 }
 
-.source-code {
+.source-code, .language-uiua {
     display: flex;
     flex-direction: column;
 }
 
+.constant {
+    --binding-color: #d1daec;
+}
+
 .module {
-    color: #d7be8c;
+    --binding-color: #d7be8c;
 }
 
 .noadic-function {
-    color: #ed5e6a;
+    --binding-color: #ed5e6a;
 }
 
 .monadic-function {
-    color: #95d16a;
+    --binding-color: #95d16a;
 }
 
 .dyadic-function {
-    color: #54b0fc;
+    --binding-color: #54b0fc;
 }
 
 .triadic-function {
-    color: #8078f1;
+    --binding-color: #8078f1;
 }
 
 .tetradic-function {
-    color: #f576d8;
+    --binding-color: #f576d8;
 }
 
 .variadic-function {
@@ -404,15 +436,19 @@ summary {
 }
 
 .monadic-modifier {
-    color: #f0c36f;
+    --binding-color: #f0c36f;
 }
 
 .dyadic-modifier {
-    color: #cc6be9;
+    --binding-color: #cc6be9;
 }
 
 .triadic-modifier {
-    color: #F5A9B8
+    --binding-color: #F5A9B8
+}
+
+.binding {
+    color: var(--binding-color);
 }
 
 .space-character {
@@ -440,4 +476,14 @@ summary {
 
 .strand-span {
     color: #fff8;
+}
+
+.output-error {
+    color: #f44;
+}
+
+.signature-separator {
+    scale: 1.2;
+    font-weight: bold;
+    padding: 0 0.25em;
 }
