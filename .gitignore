@@ -1,5 +1,8 @@
 /target
 /uiua-modules
 /doc-site
+/result
+/.direnv
+.envrc
 .vscode
 .idea
